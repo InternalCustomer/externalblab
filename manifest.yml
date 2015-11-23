@@ -2,8 +2,8 @@ applications:
 - path: .
   memory: 128M
   instances: 1
-  domain: mybluemix.net
-  name: gostartstart
-  host: gostartstart
+  domain: stage1.mybluemix.net
+  name: blab
+  host: blab
   disk_quota: 1024M
   buildpack: go_buildpack
