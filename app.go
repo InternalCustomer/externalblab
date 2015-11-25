@@ -32,7 +32,7 @@ func main() {
 
 		log.Printf("err")
 	}
-	//log.Printf("appEnv.Services: \n%+v\n", appEnv.Services)
+	log.Printf("appEnv.Services: \n%+v\n", appEnv.Services)
 	//log.Printf("Cloudant credentials: \n%+v\n", appEnv.Services)
 
 	var port string
