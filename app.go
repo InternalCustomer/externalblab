@@ -35,6 +35,19 @@ func main() {
 	log.Printf("appEnv.Services: \n%+v\n", appEnv.Services)
 	//log.Printf("Cloudant credentials: \n%+v\n", appEnv.Services)
 
+	cloudantServices, err := appEnv.Services.WithLabel("cloudantNoSQLDB")
+  if err != nil || len(cloudantServices) == 0 {
+    log.Printf("No Cloudant service info found\n")
+    return
+  }
+
+  creds := cloudantServices[0].Credentials
+
+	log.Printf("username: \n%+v\n", creds["username"])
+	log.Printf("password: \n%+v\n", creds["password"])
+
+  //db = mysql.New("tcp", "", creds["hostname"]+":"+creds["port"], creds["username"], creds["password"], creds["name"])
+	
 	var port string
 	if port = os.Getenv("PORT"); len(port) == 0 {
 		port = DEFAULT_PORT
