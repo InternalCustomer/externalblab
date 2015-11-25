@@ -23,7 +23,18 @@ func helloworld(w http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
-	
+	appEnv, err := cfenv.Current()
+	if appEnv != nil {
+
+		log.Printf("ID %+v\n", appEnv.ID)
+	}
+  if err != nil {
+
+		log.Printf("err")
+	}
+	//log.Printf("appEnv.Services: \n%+v\n", appEnv.Services)
+	//log.Printf("Cloudant credentials: \n%+v\n", appEnv.Services)
+
 	var port string
 	if port = os.Getenv("PORT"); len(port) == 0 {
 		port = DEFAULT_PORT
