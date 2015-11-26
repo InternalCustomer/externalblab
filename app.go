@@ -23,6 +23,11 @@ type post struct {
 	Category []string
 }
 
+type Data struct {
+    Text string
+    Name string
+}
+
 type cloudant_data struct {
 
 	Total_rows int //int
