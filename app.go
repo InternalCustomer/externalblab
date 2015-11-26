@@ -23,13 +23,15 @@ type post struct {
 }
 
 type cloudant_data struct {
-	
+
 	Total_rows int //int
 	Offset int //int
 	Rows []struct {
         Id string
     }
 }
+
+var urlDb string = ""
 
 const (
 	DEFAULT_PORT = "8080"
@@ -42,6 +44,51 @@ var index = template.Must(template.ParseFiles(
 
 func helloworld(w http.ResponseWriter, req *http.Request) {
   index.Execute(w, nil)
+}
+
+func save(w http.ResponseWriter, r *http.Request) {
+    name := r.FormValue("author")
+    text := r.FormValue("text")
+
+    data := &Data{name, text}
+
+    b, err := json.Marshal(data)
+    if err != nil {
+        http.Error(w, err.Error(), 500)
+        return
+    }
+    log.Printf("---------- DATA RECEIVED----------")
+		log.Printf("%s", b)
+
+		log.Printf("------------URL_DB--------------")
+		log.Printf("%s", urlDb)
+
+		log.Printf("-------- MAKING POST ON DB ------------")
+
+		dbToPost := urlDb+"/blab_test/"
+
+		req, err := http.NewRequest("POST", dbToPost, bytes.NewBuffer(b))
+ 	 //req.Header.Set("X-Custom-Header", "myvalue")
+ 	 req.Header.Set("Content-Type", "application/json")
+
+ 	 client := &http.Client{}
+ 	 resp, err := client.Do(req)
+ 	 if err != nil {
+ 			 panic(err)
+ 	 }
+ 	 defer resp.Body.Close()
+
+ 	 log.Println("response Status:", resp.Status)
+ 	 log.Println("response Headers:", resp.Header)
+ 	 body, _ := ioutil.ReadAll(resp.Body)
+ 	 log.Println("response Body:", string(body))
+
+	 http.Redirect(w, r, "http://blab.stage1.mybluemix.net/", 301)
+
+}
+
+func init() {
+    http.HandleFunc("/save", save)
 }
 
 func main() {
@@ -66,6 +113,7 @@ func main() {
   creds := cloudantServices[0].Credentials
   username := creds["username"]
 	password := creds["password"]
+	urlDb = creds["url"].(string)
 
 	//ACCESS TO CLOUDANT
 	//GET https://$USERNAME:$PASSWORD@$USERNAME.cloudant.com
