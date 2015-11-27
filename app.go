@@ -8,6 +8,7 @@ import (
 	"os"
 	"html/template"
 	"bytes"
+	"time"
 	//for extracting service credentials from VCAP_SERVICES
 	"github.com/cloudfoundry-community/go-cfenv"
 )
@@ -79,6 +80,10 @@ func save(w http.ResponseWriter, r *http.Request) {
     name := r.FormValue("author")
     text := r.FormValue("text")
 		title := r.FormValue("title")
+
+		t := time.Now() //get current date
+		log.Printf("---------- t value----------")
+		log.Printf("%s", t)
 
     data := &toPost{title,name,"", text}
 
