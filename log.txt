@@ -497,3 +497,148 @@ Connected, dumping recent logs for app Blab in org InternalCustomer / space five
 2015-11-27T11:50:57.26+0100 [App/0]      ERR 2015/11/27 10:50:57 response Headers: map[Content-Length:[95] Strict-Transport-Security:[max-age=31536000] X-Content-Type-Options:[nosniff;] Server:[CouchDB/1.0.2 (Erlang OTP/17)] Location:[http://9bd28748-9a66-441b-8b98-48f993b17e8e-bluemix.cloudant.com/blab_data/275e9259ad3923178b34964c39fc3143] Date:[Fri, 27 Nov 2015 10:50:57 GMT] Content-Type:[text/plain;charset=utf-8] Cache-Control:[must-revalidate] X-Couch-Request-Id:[1df5646639]]
 2015-11-27T11:50:57.26+0100 [App/0]      ERR 2015/11/27 10:50:57 response Body: {"ok":true,"id":"275e9259ad3923178b34964c39fc3143","rev":"1-4be573fcd3bbe48b47fe65931dc52b8c"}
 2015-11-27T11:50:57.50+0100 [RTR/1]      OUT blab.stage1.mybluemix.net - [27/11/2015:10:50:57 +0000] "GET /blab HTTP/1.1" 200 0 643 "http://blab.stage1.mybluemix.net/blab" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0" 108.168.133.211:42127 x_forwarded_for:"9.168.78.55" x_forwarded_proto:"http" vcap_request_id:f610b39d-1132-4716-496b-6ee7a6e8aaa6 response_time:0.005283983 app_id:0a1195ae-a684-4973-9b31-5bc189f7ab80 x_global_transaction_id:"328857581"
+2015-11-27T12:12:19.73+0100 [API/4]      OUT Updated app with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 ({"name"=>"Blab", "instances"=>1, "memory"=>128, "disk_quota"=>1024, "buildpack"=>"go_buildpack", "environment_json"=>"PRIVATE DATA HIDDEN"})
+2015-11-27T12:12:26.12+0100 [API/0]      OUT Updated app with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 ({"state"=>"STOPPED"})
+2015-11-27T12:12:26.25+0100 [App/0]      OUT     
+2015-11-27T12:12:27.28+0100 [DEA/18]     OUT Stopping app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:12:27.28+0100 [DEA/18]     OUT Stopped app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:12:28.07+0100 [DEA/7]      OUT Got staging request for app with id 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:12:33.54+0100 [API/1]      OUT Updated app with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 ({"state"=>"STARTED"})
+2015-11-27T12:12:33.75+0100 [STG/7]      OUT -----> Downloaded app package (112K)
+2015-11-27T12:12:35.96+0100 [STG/7]      OUT -----> Downloaded app buildpack cache (52M)
+2015-11-27T12:12:36.09+0100 [STG/0]      OUT     -------> Buildpack version 1.6.2
+2015-11-27T12:12:36.15+0100 [STG/0]      OUT -----> Checking Godeps/Godeps.json file.
+2015-11-27T12:12:36.21+0100 [STG/0]      OUT -----> Using go1.3.3
+2015-11-27T12:12:36.23+0100 [STG/0]      OUT -----> Running: godep go install -tags cloudfoundry ./...
+2015-11-27T12:12:36.53+0100 [STG/0]      ERR     # gohelloworld
+2015-11-27T12:12:36.53+0100 [STG/0]      ERR ./app.go:85: undefined: strings
+2015-11-27T12:12:36.53+0100 [STG/0]      ERR ./app.go:85: cannot slice t (type time.Time)
+2015-11-27T12:12:36.53+0100 [STG/0]      ERR godep: go exit status 2
+2015-11-27T12:12:36.99+0100 [STG/7]      OUT -----> Uploading droplet (104K)
+2015-11-27T12:12:52.53+0100 [DEA/7]      OUT Starting app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:12:57.06+0100 [API/0]      OUT App instance exited with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 payload: {"cc_partition"=>"default", "droplet"=>"0a1195ae-a684-4973-9b31-5bc189f7ab80", "version"=>"d449ef68-d15f-460c-be72-aff9822ab29d", "instance"=>"2a0a32dde15846c8bdeb47349bbda931", "index"=>0, "reason"=>"CRASHED", "exit_status"=>127, "exit_description"=>"failed to accept connections within health check timeout", "crash_timestamp"=>1448622777}
+2015-11-27T12:12:57.11+0100 [API/0]      OUT App instance exited with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 payload: {"cc_partition"=>"default", "droplet"=>"0a1195ae-a684-4973-9b31-5bc189f7ab80", "version"=>"d449ef68-d15f-460c-be72-aff9822ab29d", "instance"=>"2a0a32dde15846c8bdeb47349bbda931", "index"=>0, "reason"=>"CRASHED", "exit_status"=>127, "exit_description"=>"failed to accept connections within health check timeout", "crash_timestamp"=>1448622777}
+2015-11-27T12:12:57.11+0100 [DEA/7]      ERR Instance (index 0) failed to start accepting connections
+2015-11-27T12:13:31.86+0100 [DEA/2]      OUT Starting app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:13:37.69+0100 [API/1]      OUT App instance exited with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 payload: {"cc_partition"=>"default", "droplet"=>"0a1195ae-a684-4973-9b31-5bc189f7ab80", "version"=>"d449ef68-d15f-460c-be72-aff9822ab29d", "instance"=>"8cb2f9c11a644257b5d512130c083758", "index"=>0, "reason"=>"CRASHED", "exit_status"=>127, "exit_description"=>"app instance exited", "crash_timestamp"=>1448622817}
+2015-11-27T12:14:12.55+0100 [API/0]      OUT Updated app with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 ({"name"=>"Blab", "instances"=>1, "memory"=>128, "disk_quota"=>1024, "buildpack"=>"go_buildpack", "environment_json"=>"PRIVATE DATA HIDDEN"})
+2015-11-27T12:14:18.98+0100 [API/0]      OUT Updated app with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 ({"state"=>"STOPPED"})
+2015-11-27T12:14:20.59+0100 [DEA/2]      OUT Got staging request for app with id 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:14:26.36+0100 [API/1]      OUT Updated app with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 ({"state"=>"STARTED"})
+2015-11-27T12:14:26.55+0100 [STG/2]      OUT -----> Downloaded app package (112K)
+2015-11-27T12:14:28.67+0100 [STG/2]      OUT -----> Downloaded app buildpack cache (52M)
+2015-11-27T12:14:28.81+0100 [STG/0]      OUT     -------> Buildpack version 1.6.2
+2015-11-27T12:14:28.87+0100 [STG/0]      OUT -----> Checking Godeps/Godeps.json file.
+2015-11-27T12:14:28.92+0100 [STG/0]      OUT -----> Using go1.3.3
+2015-11-27T12:14:28.95+0100 [STG/0]      OUT -----> Running: godep go install -tags cloudfoundry ./...
+2015-11-27T12:14:29.26+0100 [STG/0]      ERR     # gohelloworld
+2015-11-27T12:14:29.26+0100 [STG/0]      ERR ./app.go:86: cannot use t (type time.Time) as type string in argument to strings.Index
+2015-11-27T12:14:29.26+0100 [STG/0]      ERR ./app.go:86: cannot slice t (type time.Time)
+2015-11-27T12:14:29.26+0100 [STG/0]      ERR godep: go exit status 2
+2015-11-27T12:14:29.70+0100 [STG/2]      OUT -----> Uploading droplet (104K)
+2015-11-27T12:14:37.70+0100 [API/5]      OUT App instance exited with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 payload: {"cc_partition"=>"default", "droplet"=>"0a1195ae-a684-4973-9b31-5bc189f7ab80", "version"=>"d449ef68-d15f-460c-be72-aff9822ab29d", "instance"=>"8cb2f9c11a644257b5d512130c083758", "index"=>0, "reason"=>"CRASHED", "exit_status"=>127, "exit_description"=>"failed to accept connections within health check timeout", "crash_timestamp"=>1448622877}
+2015-11-27T12:14:37.73+0100 [DEA/2]      ERR Instance (index 0) failed to start accepting connections
+2015-11-27T12:14:43.28+0100 [DEA/2]      OUT Starting app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:14:47.92+0100 [API/1]      OUT App instance exited with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 payload: {"cc_partition"=>"default", "droplet"=>"0a1195ae-a684-4973-9b31-5bc189f7ab80", "version"=>"f5e8a709-553a-4b7c-9298-1e926f7f09f6", "instance"=>"f00b1121241e425aa6fafec88c996973", "index"=>0, "reason"=>"CRASHED", "exit_status"=>127, "exit_description"=>"failed to accept connections within health check timeout", "crash_timestamp"=>1448622887}
+2015-11-27T12:14:47.94+0100 [DEA/2]      ERR Instance (index 0) failed to start accepting connections
+2015-11-27T12:14:47.97+0100 [API/4]      OUT App instance exited with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 payload: {"cc_partition"=>"default", "droplet"=>"0a1195ae-a684-4973-9b31-5bc189f7ab80", "version"=>"f5e8a709-553a-4b7c-9298-1e926f7f09f6", "instance"=>"f00b1121241e425aa6fafec88c996973", "index"=>0, "reason"=>"CRASHED", "exit_status"=>127, "exit_description"=>"failed to accept connections within health check timeout", "crash_timestamp"=>1448622887}
+2015-11-27T12:14:53.63+0100 [DEA/2]      OUT Removing crash for app with id 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:14:53.63+0100 [DEA/2]      OUT Stopping app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:14:53.63+0100 [DEA/2]      OUT Stopped app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:16:31.67+0100 [DEA/72]     OUT Starting app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:16:35.84+0100 [API/2]      OUT App instance exited with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 payload: {"cc_partition"=>"default", "droplet"=>"0a1195ae-a684-4973-9b31-5bc189f7ab80", "version"=>"f5e8a709-553a-4b7c-9298-1e926f7f09f6", "instance"=>"ca54cfd0b9dc471ba8c453addc7956e8", "index"=>0, "reason"=>"CRASHED", "exit_status"=>127, "exit_description"=>"failed to accept connections within health check timeout", "crash_timestamp"=>1448622995}
+2015-11-27T12:16:35.86+0100 [DEA/72]     ERR Instance (index 0) failed to start accepting connections
+2015-11-27T12:16:35.88+0100 [API/2]      OUT App instance exited with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 payload: {"cc_partition"=>"default", "droplet"=>"0a1195ae-a684-4973-9b31-5bc189f7ab80", "version"=>"f5e8a709-553a-4b7c-9298-1e926f7f09f6", "instance"=>"ca54cfd0b9dc471ba8c453addc7956e8", "index"=>0, "reason"=>"CRASHED", "exit_status"=>127, "exit_description"=>"failed to accept connections within health check timeout", "crash_timestamp"=>1448622995}
+2015-11-27T12:17:31.64+0100 [DEA/90]     OUT Starting app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:17:36.87+0100 [API/1]      OUT App instance exited with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 payload: {"cc_partition"=>"default", "droplet"=>"0a1195ae-a684-4973-9b31-5bc189f7ab80", "version"=>"f5e8a709-553a-4b7c-9298-1e926f7f09f6", "instance"=>"1edde1d4381e4c89a43c20d253ae52c3", "index"=>0, "reason"=>"CRASHED", "exit_status"=>127, "exit_description"=>"failed to accept connections within health check timeout", "crash_timestamp"=>1448623056}
+2015-11-27T12:17:36.89+0100 [DEA/90]     ERR Instance (index 0) failed to start accepting connections
+2015-11-27T12:17:36.90+0100 [API/4]      OUT App instance exited with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 payload: {"cc_partition"=>"default", "droplet"=>"0a1195ae-a684-4973-9b31-5bc189f7ab80", "version"=>"f5e8a709-553a-4b7c-9298-1e926f7f09f6", "instance"=>"1edde1d4381e4c89a43c20d253ae52c3", "index"=>0, "reason"=>"CRASHED", "exit_status"=>127, "exit_description"=>"failed to accept connections within health check timeout", "crash_timestamp"=>1448623056}
+2015-11-27T12:18:01.64+0100 [DEA/7]      OUT Removing crash for app with id 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:18:01.64+0100 [DEA/7]      OUT Stopping app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:18:01.64+0100 [DEA/7]      OUT Stopped app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:18:31.62+0100 [DEA/71]     OUT Starting app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:18:35.78+0100 [API/0]      OUT App instance exited with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 payload: {"cc_partition"=>"default", "droplet"=>"0a1195ae-a684-4973-9b31-5bc189f7ab80", "version"=>"f5e8a709-553a-4b7c-9298-1e926f7f09f6", "instance"=>"f17f8df83fa34ac391df9dcaf798374f", "index"=>0, "reason"=>"CRASHED", "exit_status"=>127, "exit_description"=>"failed to accept connections within health check timeout", "crash_timestamp"=>1448623115}
+2015-11-27T12:18:35.79+0100 [API/0]      OUT App instance exited with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 payload: {"cc_partition"=>"default", "droplet"=>"0a1195ae-a684-4973-9b31-5bc189f7ab80", "version"=>"f5e8a709-553a-4b7c-9298-1e926f7f09f6", "instance"=>"f17f8df83fa34ac391df9dcaf798374f", "index"=>0, "reason"=>"CRASHED", "exit_status"=>127, "exit_description"=>"failed to accept connections within health check timeout", "crash_timestamp"=>1448623115}
+2015-11-27T12:18:35.80+0100 [DEA/71]     ERR Instance (index 0) failed to start accepting connections
+2015-11-27T12:19:53.59+0100 [DEA/2]      OUT Removing crash for app with id 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:19:53.59+0100 [DEA/2]      OUT Stopping app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:19:53.59+0100 [DEA/2]      OUT Stopped app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:20:16.58+0100 [DEA/18]     OUT Starting app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:20:22.15+0100 [API/2]      OUT App instance exited with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 payload: {"cc_partition"=>"default", "droplet"=>"0a1195ae-a684-4973-9b31-5bc189f7ab80", "version"=>"f5e8a709-553a-4b7c-9298-1e926f7f09f6", "instance"=>"92a6860eea4b48708cca236b77084726", "index"=>0, "reason"=>"CRASHED", "exit_status"=>127, "exit_description"=>"app instance exited", "crash_timestamp"=>1448623222}
+2015-11-27T12:20:51.32+0100 [API/4]      OUT Updated app with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 ({"name"=>"Blab", "instances"=>1, "memory"=>128, "disk_quota"=>1024, "buildpack"=>"go_buildpack", "environment_json"=>"PRIVATE DATA HIDDEN"})
+2015-11-27T12:20:57.64+0100 [API/0]      OUT Updated app with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 ({"state"=>"STOPPED"})
+2015-11-27T12:20:59.18+0100 [DEA/71]     OUT Got staging request for app with id 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:21:05.18+0100 [API/5]      OUT Updated app with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 ({"state"=>"STARTED"})
+2015-11-27T12:21:05.29+0100 [STG/71]     OUT -----> Downloaded app package (112K)
+2015-11-27T12:21:07.55+0100 [STG/71]     OUT -----> Downloaded app buildpack cache (52M)
+2015-11-27T12:21:07.71+0100 [STG/0]      OUT     -------> Buildpack version 1.6.2
+2015-11-27T12:21:07.77+0100 [STG/0]      OUT -----> Checking Godeps/Godeps.json file.
+2015-11-27T12:21:07.81+0100 [STG/0]      OUT -----> Using go1.3.3
+2015-11-27T12:21:07.83+0100 [STG/0]      OUT -----> Running: godep go install -tags cloudfoundry ./...
+2015-11-27T12:21:08.11+0100 [STG/0]      ERR     # gohelloworld
+2015-11-27T12:21:08.11+0100 [STG/0]      ERR ./app.go:12: imported and not used: "strings"
+2015-11-27T12:21:08.12+0100 [STG/0]      ERR godep: go exit status 2
+2015-11-27T12:21:08.55+0100 [STG/71]     OUT -----> Uploading droplet (104K)
+2015-11-27T12:21:22.14+0100 [DEA/18]     ERR Instance (index 0) failed to start accepting connections
+2015-11-27T12:21:22.18+0100 [API/1]      OUT App instance exited with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 payload: {"cc_partition"=>"default", "droplet"=>"0a1195ae-a684-4973-9b31-5bc189f7ab80", "version"=>"f5e8a709-553a-4b7c-9298-1e926f7f09f6", "instance"=>"92a6860eea4b48708cca236b77084726", "index"=>0, "reason"=>"CRASHED", "exit_status"=>127, "exit_description"=>"failed to accept connections within health check timeout", "crash_timestamp"=>1448623282}
+2015-11-27T12:21:31.35+0100 [DEA/71]     OUT Starting app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:21:35.84+0100 [API/0]      OUT App instance exited with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 payload: {"cc_partition"=>"default", "droplet"=>"0a1195ae-a684-4973-9b31-5bc189f7ab80", "version"=>"6d883031-6ee9-49af-b42f-fd83f041a2b6", "instance"=>"569702b3905c4a5caf33db321c05ecb9", "index"=>0, "reason"=>"CRASHED", "exit_status"=>127, "exit_description"=>"app instance exited", "crash_timestamp"=>1448623295}
+2015-11-27T12:21:37.71+0100 [DEA/71]     OUT Removing crash for app with id 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:21:37.71+0100 [DEA/71]     OUT Stopping app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:21:37.71+0100 [DEA/71]     OUT Stopped app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:21:40.61+0100 [DEA/72]     OUT Removing crash for app with id 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:21:40.61+0100 [DEA/72]     OUT Stopping app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:21:40.61+0100 [DEA/72]     OUT Stopped app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:22:31.63+0100 [DEA/48]     OUT Starting app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:22:35.83+0100 [DEA/71]     ERR Instance (index 0) failed to start accepting connections
+2015-11-27T12:22:35.87+0100 [API/5]      OUT App instance exited with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 payload: {"cc_partition"=>"default", "droplet"=>"0a1195ae-a684-4973-9b31-5bc189f7ab80", "version"=>"6d883031-6ee9-49af-b42f-fd83f041a2b6", "instance"=>"569702b3905c4a5caf33db321c05ecb9", "index"=>0, "reason"=>"CRASHED", "exit_status"=>127, "exit_description"=>"failed to accept connections within health check timeout", "crash_timestamp"=>1448623355}
+2015-11-27T12:22:40.52+0100 [DEA/48]     ERR Instance (index 0) failed to start accepting connections
+2015-11-27T12:22:40.55+0100 [API/1]      OUT App instance exited with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 payload: {"cc_partition"=>"default", "droplet"=>"0a1195ae-a684-4973-9b31-5bc189f7ab80", "version"=>"6d883031-6ee9-49af-b42f-fd83f041a2b6", "instance"=>"74da08f3390f4469966b7b10803a48c2", "index"=>0, "reason"=>"CRASHED", "exit_status"=>127, "exit_description"=>"failed to accept connections within health check timeout", "crash_timestamp"=>1448623360}
+2015-11-27T12:22:40.56+0100 [API/5]      OUT App instance exited with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 payload: {"cc_partition"=>"default", "droplet"=>"0a1195ae-a684-4973-9b31-5bc189f7ab80", "version"=>"6d883031-6ee9-49af-b42f-fd83f041a2b6", "instance"=>"74da08f3390f4469966b7b10803a48c2", "index"=>0, "reason"=>"CRASHED", "exit_status"=>127, "exit_description"=>"failed to accept connections within health check timeout", "crash_timestamp"=>1448623360}
+2015-11-27T12:22:41.81+0100 [DEA/90]     OUT Removing crash for app with id 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:22:41.81+0100 [DEA/90]     OUT Stopping app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:22:41.81+0100 [DEA/90]     OUT Stopped app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:23:27.57+0100 [API/3]      OUT Updated app with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 ({"name"=>"Blab", "instances"=>1, "memory"=>128, "disk_quota"=>1024, "buildpack"=>"go_buildpack", "environment_json"=>"PRIVATE DATA HIDDEN"})
+2015-11-27T12:23:31.72+0100 [DEA/43]     OUT Starting app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:23:34.08+0100 [API/5]      OUT Updated app with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 ({"state"=>"STOPPED"})
+2015-11-27T12:23:34.15+0100 [API/1]      OUT App instance exited with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 payload: {"cc_partition"=>"default", "droplet"=>"0a1195ae-a684-4973-9b31-5bc189f7ab80", "version"=>"6d883031-6ee9-49af-b42f-fd83f041a2b6", "instance"=>"0d295ae8141a4fb09bda76d4b39edcb0", "index"=>0, "reason"=>"CRASHED", "exit_status"=>-1, "exit_description"=>"failed to start", "crash_timestamp"=>1448623414}
+2015-11-27T12:23:35.71+0100 [DEA/17]     OUT Got staging request for app with id 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:23:41.78+0100 [API/2]      OUT Updated app with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80 ({"state"=>"STARTED"})
+2015-11-27T12:23:41.93+0100 [STG/17]     OUT -----> Downloaded app package (112K)
+2015-11-27T12:23:44.27+0100 [STG/17]     OUT -----> Downloaded app buildpack cache (52M)
+2015-11-27T12:23:44.41+0100 [STG/0]      OUT     -------> Buildpack version 1.6.2
+2015-11-27T12:23:44.48+0100 [STG/0]      OUT -----> Checking Godeps/Godeps.json file.
+2015-11-27T12:23:44.53+0100 [STG/0]      OUT -----> Using go1.3.3
+2015-11-27T12:23:44.55+0100 [STG/0]      OUT -----> Running: godep go install -tags cloudfoundry ./...
+2015-11-27T12:23:45.78+0100 [STG/0]      ERR     
+2015-11-27T12:23:46.76+0100 [STG/17]     OUT -----> Uploading droplet (2.1M)
+2015-11-27T12:24:00.60+0100 [DEA/17]     OUT Starting app instance (index 0) with guid 0a1195ae-a684-4973-9b31-5bc189f7ab80
+2015-11-27T12:24:05.49+0100 [App/0]      ERR     2015/11/27 11:24:05 ID ac9cc5c1e78042e1bc8a5e816e806e22
+2015-11-27T12:24:05.49+0100 [App/0]      ERR 2015/11/27 11:24:05 appEnv.Services: 
+2015-11-27T12:24:05.49+0100 [App/0]      ERR map[cloudantNoSQLDB:[{Name:Cloudant NoSQL DB-am Label:cloudantNoSQLDB Tags:[data_management ibm_created ibm_dedicated_public] Plan:Shared Credentials:map[host:9bd28748-9a66-441b-8b98-48f993b17e8e-bluemix.cloudant.com port:443 url:https://9bd28748-9a66-441b-8b98-48f993b17e8e-bluemix:483f8ba7b8507e15548befa5e1b9c53cd3535f2c7ec75504dec3369df37b058d@9bd28748-9a66-441b-8b98-48f993b17e8e-bluemix.cloudant.com username:9bd28748-9a66-441b-8b98-48f993b17e8e-bluemix password:483f8ba7b8507e15548befa5e1b9c53cd3535f2c7ec75504dec3369df37b058d]}]]
+2015-11-27T12:24:05.51+0100 [App/0]      ERR 2015/11/27 11:24:05 Body: {"couchdb":"Welcome","version":"1.0.2","cloudant_build":"2530"}
+2015-11-27T12:24:05.53+0100 [App/0]      ERR 2015/11/27 11:24:05 Body: {"total_rows":2,"offset":0,"rows":[
+2015-11-27T12:24:05.53+0100 [App/0]      ERR {"id":"a4b4a67553635b966c905f11623d4ae6","key":"a4b4a67553635b966c905f11623d4ae6","value":{"rev":"1-710193f4a0b228f5c3e3e2caa8938426"}},
+2015-11-27T12:24:05.53+0100 [App/0]      ERR {"id":"a4b4a67553635b966c905f1162a075b2","key":"a4b4a67553635b966c905f1162a075b2","value":{"rev":"1-64f15d38131ece0af5356d7a660d29f4"}}
+2015-11-27T12:24:05.53+0100 [App/0]      ERR ]}
+2015-11-27T12:24:05.53+0100 [App/0]      ERR 2015/11/27 11:24:05 Title: {Id: Rev: Title: Author: Date: Text: Category:[]}
+2015-11-27T12:24:05.53+0100 [App/0]      ERR 2015/11/27 11:24:05 Title: 
+2015-11-27T12:24:05.53+0100 [App/0]      ERR 2015/11/27 11:24:05 author: 
+2015-11-27T12:24:05.53+0100 [App/0]      ERR 2015/11/27 11:24:05 Starting app on port 63625
+2015-11-27T12:24:32.54+0100 [RTR/2]      OUT blab.stage1.mybluemix.net - [27/11/2015:11:24:32 +0000] "GET / HTTP/1.1" 200 0 548 "-" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0" 108.168.133.216:12679 x_forwarded_for:"9.168.78.55" x_forwarded_proto:"http" vcap_request_id:0d952868-4c74-410b-4df8-b02fa469ade3 response_time:0.005151638 app_id:0a1195ae-a684-4973-9b31-5bc189f7ab80 x_global_transaction_id:"335535887"
+2015-11-27T12:24:32.84+0100 [RTR/0]      OUT blab.stage1.mybluemix.net - [27/11/2015:11:24:32 +0000] "GET /static/stylesheets/style.css HTTP/1.1" 200 0 1248 "http://blab.stage1.mybluemix.net/" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0" 108.168.133.215:37441 x_forwarded_for:"9.168.78.55" x_forwarded_proto:"http" vcap_request_id:e9be63c2-9a78-4405-4855-d585dba6bc26 response_time:0.008945387 app_id:0a1195ae-a684-4973-9b31-5bc189f7ab80 x_global_transaction_id:"193744097"
+2015-11-27T12:24:33.09+0100 [RTR/1]      OUT blab.stage1.mybluemix.net - [27/11/2015:11:24:33 +0000] "GET /static/images/gophercolor.png HTTP/1.1" 200 0 54152 "http://blab.stage1.mybluemix.net/" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0" 108.168.133.215:15858 x_forwarded_for:"9.168.78.55" x_forwarded_proto:"http" vcap_request_id:192f731a-338e-41e6-74b6-c48bca26faf0 response_time:0.012062599 app_id:0a1195ae-a684-4973-9b31-5bc189f7ab80 x_global_transaction_id:"305741383"
+2015-11-27T12:24:35.14+0100 [RTR/3]      OUT blab.stage1.mybluemix.net - [27/11/2015:11:24:35 +0000] "GET /blab HTTP/1.1" 200 0 643 "http://blab.stage1.mybluemix.net/" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0" 108.168.133.216:56506 x_forwarded_for:"9.168.78.55" x_forwarded_proto:"http" vcap_request_id:89915b28-3004-4b3b-69dd-4dc49578f612 response_time:0.005496085 app_id:0a1195ae-a684-4973-9b31-5bc189f7ab80 x_global_transaction_id:"193744609"
+2015-11-27T12:24:45.33+0100 [App/0]      ERR 2015/11/27 11:24:45 ---------- date value----------
+2015-11-27T12:24:45.33+0100 [App/0]      ERR 2015/11/27 11:24:45 271145-1111-277 110:450:457
+2015-11-27T12:24:45.33+0100 [App/0]      ERR 2015/11/27 11:24:45 ---------- DATA RECEIVED----------
+2015-11-27T12:24:45.33+0100 [App/0]      ERR 2015/11/27 11:24:45 {"Title":"fdsfsdfsdf","Author":"dsfdsfdsffsdf","Date":"271145-1111-277 110:450:457","Text":"fdsfsdgfdgdsdsgsdgsgfdgd"}
+2015-11-27T12:24:45.33+0100 [App/0]      ERR 2015/11/27 11:24:45 ------------URL_DB--------------
+2015-11-27T12:24:45.33+0100 [App/0]      ERR 2015/11/27 11:24:45 https://9bd28748-9a66-441b-8b98-48f993b17e8e-bluemix:483f8ba7b8507e15548befa5e1b9c53cd3535f2c7ec75504dec3369df37b058d@9bd28748-9a66-441b-8b98-48f993b17e8e-bluemix.cloudant.com
+2015-11-27T12:24:45.33+0100 [App/0]      ERR 2015/11/27 11:24:45 -------- MAKING POST ON DB ------------
+2015-11-27T12:24:45.38+0100 [App/0]      ERR 2015/11/27 11:24:45 response Status: 201 Created
+2015-11-27T12:24:45.38+0100 [App/0]      ERR 2015/11/27 11:24:45 response Headers: map[Cache-Control:[must-revalidate] X-Content-Type-Options:[nosniff;] X-Couch-Request-Id:[86042b25be] Location:[http://9bd28748-9a66-441b-8b98-48f993b17e8e-bluemix.cloudant.com/blab_data/f36d4e8c122bd8e2ef56c2bea47bb944] Date:[Fri, 27 Nov 2015 11:24:45 GMT] Content-Type:[text/plain;charset=utf-8] Server:[CouchDB/1.0.2 (Erlang OTP/17)] Content-Length:[95] Strict-Transport-Security:[max-age=31536000]]
+2015-11-27T12:24:45.38+0100 [App/0]      ERR 2015/11/27 11:24:45 response Body: {"ok":true,"id":"f36d4e8c122bd8e2ef56c2bea47bb944","rev":"1-7d944682e224047eed0c5370867a9ac1"}
+2015-11-27T12:24:45.39+0100 [RTR/3]      OUT blab.stage1.mybluemix.net - [27/11/2015:11:24:45 +0000] "POST /save HTTP/1.1" 301 67 0 "http://blab.stage1.mybluemix.net/blab" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0" 108.168.133.216:56674 x_forwarded_for:"9.168.78.55" x_forwarded_proto:"http" vcap_request_id:3df03c23-5483-4e39-6bfd-7509e3f2bc45 response_time:0.057414968 app_id:0a1195ae-a684-4973-9b31-5bc189f7ab80 x_global_transaction_id:"305741959"
+2015-11-27T12:24:45.63+0100 [RTR/2]      OUT blab.stage1.mybluemix.net - [27/11/2015:11:24:45 +0000] "GET /blab HTTP/1.1" 200 0 643 "http://blab.stage1.mybluemix.net/blab" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0" 108.168.133.216:12977 x_forwarded_for:"9.168.78.55" x_forwarded_proto:"http" vcap_request_id:f4939f7d-2851-46bd-4aba-cb4b4533e03f response_time:0.005209659 app_id:0a1195ae-a684-4973-9b31-5bc189f7ab80 x_global_transaction_id:"193750017"
+2015-11-27T12:24:45.89+0100 [RTR/2]      OUT blab.stage1.mybluemix.net - [27/11/2015:11:24:45 +0000] "GET /static/stylesheets/style.css HTTP/1.1" 304 0 0 "http://blab.stage1.mybluemix.net/blab" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0" 108.168.133.216:12982 x_forwarded_for:"9.168.78.55" x_forwarded_proto:"http" vcap_request_id:80f8778c-a030-4315-6693-1d42d8e26af8 response_time:0.004984053 app_id:0a1195ae-a684-4973-9b31-5bc189f7ab80 x_global_transaction_id:"327185629"
