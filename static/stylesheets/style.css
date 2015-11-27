@@ -35,10 +35,13 @@ h1 {
 
 .bang{
 	font-family: 'Bangers', cursive;
+	color: #ffffff;
 }
 
 .indie{
-	font-family: 'Indie Flower', cursive;
+	font-family: "Josefin Sans",sans-serif;
+font-size: 20px;
+letter-spacing: 1px;
 }
 
 .leftHalf {
@@ -61,6 +64,7 @@ h1 {
 	padding-right: 50px;
 	text-align: center;
 	font-size: 1.2em;
+	color: #ffffff;
 }
 
 .blue {
