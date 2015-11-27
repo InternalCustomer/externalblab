@@ -20,6 +20,15 @@ type post struct {
 	Author string
 	Date string
 	Text string
+	Category []string
+}
+
+type toPost struct {
+
+	Title string
+	Author string
+	Date string
+	Text string
 	//Category []string
 }
 
@@ -71,7 +80,7 @@ func save(w http.ResponseWriter, r *http.Request) {
     text := r.FormValue("text")
 		title := r.FormValue("title")
 
-    data := &post{title,name,"", text}
+    data := &toPost{title,name,"", text}
 
     b, err := json.Marshal(data)
     if err != nil {
