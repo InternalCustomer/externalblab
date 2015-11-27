@@ -50,10 +50,10 @@ var blab = template.Must(template.ParseFiles(
 
 func blabHandler(w http.ResponseWriter, req *http.Request) {
 
-  postBody := "<p></p>"
+  postBody := "<p></p><hr><p>In progress</p>"
 	page := struct {
 				Title	string
-			//	Body interface{}
+			  Body interface{}
 		}{"BLAB",template.HTML(postBody)}
 
 		page.Title = "BLAB"
