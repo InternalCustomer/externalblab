@@ -113,7 +113,7 @@ func save(w http.ResponseWriter, r *http.Request) {
  	 body, _ := ioutil.ReadAll(resp.Body)
  	 log.Println("response Body:", string(body))
 
-	 http.Redirect(w, r, "/blab/", 301)
+	 http.Redirect(w, r, "/blab", 301)
 
 }
 
