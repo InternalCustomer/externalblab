@@ -82,10 +82,11 @@ func save(w http.ResponseWriter, r *http.Request) {
 		title := r.FormValue("title")
 
 		t := time.Now() //get current date
-		log.Printf("---------- t value----------")
-		log.Printf("%s", t)
+		date := t[:strings.Index(t, ".")]
+		log.Printf("---------- date value----------")
+		log.Printf("%s", date)
 
-    data := &toPost{title,name,"", text}
+    data := &toPost{title,name,date, text}
 
     b, err := json.Marshal(data)
     if err != nil {
