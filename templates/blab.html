@@ -9,14 +9,22 @@
 	<div style="padding: 2%;" class="container">
 <div style="width: 60%; margin-left: 20%;" class="jumbotron">
 
-	<form name="form" style="letter-spacing:1px;" action="/save" method="post">
-	Author:<br><input name="author" class="indie" type="text"><br><br>
-	Title:<br> <input name="title" class="indie" type="text"><br><br>
-	Write your post here:<br>
-		<textarea name="text" class="indie" style="width:100%"></textarea><p></p>
-	<p style="text-align: center;"><input class="btn btn-default" value="Blab it" type="submit"></p>
-</form>
-	<p></p><hr><p>In progress</p>
+	<form role="form" name="form" style="letter-spacing:1px;padding:2%;" action="/save" method="post">
+	 <div class="form-group">
+		 Author:<br><input name="author" class="indie" type="text">
+	 </div>
+	 <div class="form-group">
+		 	Title:<br> <input name="title" class="indie" type="text">
+	 </div>
+	 <div class="form-group">
+		 Write your post here:<br>
+	 		<textarea name="text" class="indie" style="width:100%"></textarea>
+	 </div>
+	 <input class="btn btn-default" value="Blab it" type="submit">
+	</form>
+
+
+	<p></p><hr><p style="text-align:center;">In progress</p>
 </div>
 </div>
 </div>
