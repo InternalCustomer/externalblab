@@ -18,14 +18,9 @@ type post struct {
 	Rev string `json:"_rev"`
 	Title string
 	Author string
-	Data string
+	Date string
 	Text string
 	Category []string
-}
-
-type Data struct {
-    Text string
-    Name string
 }
 
 type cloudant_data struct {
@@ -48,15 +43,32 @@ var index = template.Must(template.ParseFiles(
   "templates/index.html",
 ))
 
-func helloworld(w http.ResponseWriter, req *http.Request) {
+var blab = template.Must(template.ParseFiles(
+	"templates/_base.html",
+  "templates/blab.html",
+))
+
+func blabHandler(w http.ResponseWriter, req *http.Request) {
+
+	page := struct {
+				Title	string = "BLAB"
+			//	Body interface{}
+		}{"BLAB",template.HTML()}
+
+    blab.Execute(w, page)
+}
+
+//Index Page - about
+func indexHandler(w http.ResponseWriter, req *http.Request) {
   index.Execute(w, nil)
 }
 
 func save(w http.ResponseWriter, r *http.Request) {
     name := r.FormValue("author")
     text := r.FormValue("text")
+		title := r.FormValue("title")
 
-    data := &Data{name, text}
+    data := &post{title,name,"", text}
 
     b, err := json.Marshal(data)
     if err != nil {
@@ -71,7 +83,7 @@ func save(w http.ResponseWriter, r *http.Request) {
 
 		log.Printf("-------- MAKING POST ON DB ------------")
 
-		dbToPost := urlDb+"/blab_test/"
+		dbToPost := urlDb+"/blab_data/"
 
 		req, err := http.NewRequest("POST", dbToPost, bytes.NewBuffer(b))
  	 //req.Header.Set("X-Custom-Header", "myvalue")
@@ -89,7 +101,7 @@ func save(w http.ResponseWriter, r *http.Request) {
  	 body, _ := ioutil.ReadAll(resp.Body)
  	 log.Println("response Body:", string(body))
 
-	 http.Redirect(w, r, "http://blab.stage1.mybluemix.net/", 301)
+	 http.Redirect(w, r, blabHandler, 301)
 
 }
 
@@ -173,8 +185,9 @@ func main() {
 		port = DEFAULT_PORT
 	}
 
-	http.HandleFunc("/", helloworld)
+	http.HandleFunc("/", indexHandler)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	http.HandleFunc("/blab", blabHandler)
 
 	log.Printf("Starting app on port %+v\n", port)
 	http.ListenAndServe(":"+port, nil)
