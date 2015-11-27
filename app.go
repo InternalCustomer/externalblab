@@ -71,7 +71,7 @@ func save(w http.ResponseWriter, r *http.Request) {
     text := r.FormValue("text")
 		title := r.FormValue("title")
 
-    data := &post{title,name,"", text}
+    data := &post{title,name,"", text, nil}
 
     b, err := json.Marshal(data)
     if err != nil {
@@ -104,7 +104,7 @@ func save(w http.ResponseWriter, r *http.Request) {
  	 body, _ := ioutil.ReadAll(resp.Body)
  	 log.Println("response Body:", string(body))
 
-	 http.Redirect(w, r, blabHandler, 301)
+	 http.Redirect(w, r, "/blab/", 301)
 
 }
 
