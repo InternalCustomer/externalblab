@@ -20,7 +20,7 @@ type post struct {
 	Author string
 	Date string
 	Text string
-	Category []string
+	//Category []string
 }
 
 type cloudant_data struct {
@@ -71,7 +71,7 @@ func save(w http.ResponseWriter, r *http.Request) {
     text := r.FormValue("text")
 		title := r.FormValue("title")
 
-    data := &post{title,name,"", text, [""]}
+    data := &post{title,name,"", text}
 
     b, err := json.Marshal(data)
     if err != nil {
