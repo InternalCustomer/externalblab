@@ -9,7 +9,6 @@ import (
 	"html/template"
 	"bytes"
 	"time"
-	"strings"
 	//for extracting service credentials from VCAP_SERVICES
 	"github.com/cloudfoundry-community/go-cfenv"
 )
