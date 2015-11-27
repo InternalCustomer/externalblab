@@ -33,6 +33,10 @@ h1 {
 	font-size: 2em;
 }
 
+.bang{
+	font-family: 'Bangers', cursive;
+}
+
 .leftHalf {
 	float: left;
 	background-color: #26343f;

@@ -4,6 +4,10 @@
 
 {{ define "content"}}
 	<div class='postContainer'>
+		<h1 class="bang, font-weight: normal">Just Blab it!</h1>
+		<div class="container">
+  <div class="jumbotron">
+
 		<form name="form" action="/save" method="post">
 		Author: <input name="author" type="text"></input><br>
 		Title: <input name="title" type="text"></input><br>
@@ -13,4 +17,6 @@
 	</form>
 		{{.Body}}
 	</div>
+</div>
+</div>
 {{ end }}
