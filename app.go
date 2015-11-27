@@ -83,7 +83,8 @@ func save(w http.ResponseWriter, r *http.Request) {
 		title := r.FormValue("title")
 
 		t := time.Now() //get current date
-		date := t[:strings.Index(t, ".")]
+		//date := t[:strings.Index(t, ".")]
+		date := t.Format("2015-11-27 10:50:57")
 		log.Printf("---------- date value----------")
 		log.Printf("%s", date)
 
