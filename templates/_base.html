@@ -12,6 +12,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body style="background-color: #088A68;">
-	<section id="contents" style="background-color: #088A68">{{ template "content" . }}</section>
+	<section id="contents" style="background-color: #088A68">
+
+		<h1 class="bang" style="font-weight: normal; text-align: center;">Just Blab it!</h1>
+		<div style="padding: 2%;" class="container">
+		<div style="width: 80%; margin-left: 10%;" class="jumbotron">
+
+			{{ template "content" . }}
+
+		</div>
+		</div>
+	</section>
 </body>
 </html>

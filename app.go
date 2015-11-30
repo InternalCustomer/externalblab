@@ -9,8 +9,9 @@ import (
 	"html/template"
 	"bytes"
 	"time"
+	"strings"
 	//for extracting service credentials from VCAP_SERVICES
-	"github.com/cloudfoundry-community/go-cfenv"
+	//"github.com/cloudfoundry-community/go-cfenv"
 )
 
 type post struct {
@@ -52,7 +53,6 @@ const (
 )
 
 var index = template.Must(template.ParseFiles(
-  "templates/_base.html",
   "templates/index.html",
 ))
 
@@ -114,7 +114,10 @@ func blabHandler(w http.ResponseWriter, req *http.Request) {
 				os.Exit(1)
 			}
 			p.SetDefaults()
-			postBody += "<div class ='post'><span class='title'>"+ p.Title +"</span>&#9;<span class='author'>"+ p.Author +"</span><br><span class='data'>"+ p.Date +"</span>" + "<a href='../blabPost?id=" + p.Id + "'> GO!!!</a>" + "</div><br>"
+			p.Date = strings.Replace(p.Date, "T", " ", 1)
+			p.Date = strings.Replace(p.Date, "Z", "", 1)
+
+			postBody += "<a href='../blabPost?id=" + p.Id + "' class ='list-group-item'><span class='list-group-item-heading' style='font-size: medium;font-weight: 600;'>"+ p.Title +"</span>&#09; - &#09;<span>"+ p.Author +"</span><br><h6>"+ p.Date +"</h6> </a>"
 	}
 
 	page := struct {
@@ -149,7 +152,7 @@ func blabPostHandler(w http.ResponseWriter, req *http.Request) {
 		log.Printf("Err body: %s\n", err)
 		os.Exit(1)
 	}
-	postBody += "<div class ='post'><span class='title'>"+ p.Title +"</span>&#9;<span class='author'>"+ p.Author +"</span><br><span class='data'>"+ p.Date +"</span>" + "</span><br><p class='text'>"+ p.Text +"</p>" + "<a href='../blabPostDelete?id=" + p.Id + "&rev="+ p.Rev +"'> DELETE!!!</a>" + "</div><br>"
+	postBody += "<div class ='post'><span class='title'>"+ p.Title +"</span>&#9;<span class='author'>"+ p.Author +"</span><br><span class='data'>"+ p.Date +"</span>" + "</span><br><p class='text'>"+ p.Text +"</p>" + "<a href='../blab'> <<< </a>" + "</div><br>"
 
 	page := struct {
 			Title	string
@@ -218,26 +221,26 @@ func init() {
 }
 
 func main() {
-	appEnv, err := cfenv.Current()
-	if appEnv != nil {
-
-		log.Printf("ID %+v\n", appEnv.ID)
-	}
-  if err != nil {
-
-		log.Printf("err")
-	}
-	log.Printf("appEnv.Services: \n%+v\n", appEnv.Services)
-	//log.Printf("Cloudant credentials: \n%+v\n", appEnv.Services)
-
-	cloudantServices, err := appEnv.Services.WithLabel("cloudantNoSQLDB")
-  if err != nil || len(cloudantServices) == 0 {
-    log.Printf("No Cloudant service info found\n")
-    return
-  }
-
-  creds := cloudantServices[0].Credentials
-	basicUrl = creds["url"].(string)
+	// appEnv, err := cfenv.Current()
+	// if appEnv != nil {
+	//
+	// 	log.Printf("ID %+v\n", appEnv.ID)
+	// }
+  // if err != nil {
+	//
+	// 	log.Printf("err")
+	// }
+	// log.Printf("appEnv.Services: \n%+v\n", appEnv.Services)
+	// //log.Printf("Cloudant credentials: \n%+v\n", appEnv.Services)
+	//
+	// cloudantServices, err := appEnv.Services.WithLabel("cloudantNoSQLDB")
+  // if err != nil || len(cloudantServices) == 0 {
+  //   log.Printf("No Cloudant service info found\n")
+  //   return
+  // }
+	//
+  // creds := cloudantServices[0].Credentials
+	// basicUrl = creds["url"].(string)
 
 	var port string
 		if port = os.Getenv("PORT"); len(port) == 0 {

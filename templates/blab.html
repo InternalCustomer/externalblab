@@ -4,13 +4,6 @@
 
 {{ define "content"}}
 
-
-<section id="contents" style="background-color: #088A68">
-<div class="postContainer">
-	<h1 class="bang" style="font-weight: normal; text-align: center;">Just Blab it!</h1>
-	<div style="padding: 2%;" class="container">
-<div style="width: 80%; margin-left: 10%;" class="jumbotron">
-
 <!--- COLLAPSE BUTTON----->
 <div class="panel panel-default">
       <div class="panel-heading">
@@ -18,7 +11,7 @@
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">+ Blab</a>
         </h4>
       </div>
-      <div id="collapse1" class="panel-collapse collapse in">
+      <div id="collapse1" class="panel-collapse collapse out">
         <div class="panel-body">
 					<form role="form" name="form" style="letter-spacing:1px;padding:2%;" action="/save" method="post">
 					 <div class="form-group">
@@ -35,13 +28,10 @@
 					</form>
 				</div>
       </div>
+			<div class='list-group'>
+					{{.Body}}
+			</div>
 
-	<div class='postContainer'>
-			{{.Body}}
-	</div>
+</div>
 
-</div>
-</div>
-</div>
-</section>
 {{ end }}
