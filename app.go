@@ -40,12 +40,12 @@ type toPost struct {
 }
 
 type cloudant_data struct {
-
-	Total_rows int //int
-	Offset int //int
-	Rows []struct {
-        Id string
-    }
+	Docs []post
+	//Total_rows int //int
+	//Offset int //int
+	//Rows []struct {
+    //    Id string
+    //}
 }
 
 const (
@@ -71,18 +71,42 @@ var basicUrl = "https://9bd28748-9a66-441b-8b98-48f993b17e8e-bluemix:483f8ba7b85
 
 func blabHandler(w http.ResponseWriter, req *http.Request) {
 
-	//LIST ALL DOCS IN blab_data
-	//GET https://$USERNAME:$PASSWORD@$USERNAME.cloudant.com/blab_data/_all_docs
-	allDocsUrl := basicUrl + "/blab_data/_all_docs"
+	//LIST ALL DOCS IN blab_data sorted by Date
+	//POST https://$USERNAME:$PASSWORD@$USERNAME.cloudant.com/blab_data/_find
+	//POST Body
+	// 	{
+	//   "selector": {
+	//     "Date": {
+	//       "$gt": 0
+	//     }
+	//   },
+	//   "fields": [
+	//     "_id",
+	//     "Title",
+	//     "Author",
+	//     "Date"
+	//   ],
+	//   "sort": [
+	//     {
+	//       "Date": "desc"
+	//     }
+	//   ]
+	// }
+	//Query to sort posts by date
+	var jsonString = []byte(`{ "selector": { "Date": { "$gt": 0 } }, "fields": [ "_id", "Title", "Author", "Date" ], "sort": [ { "Date": "desc" } ] }`)
+  //postBody := "{ \"selector\": { \"Date\": { \"$gt\": 0 } }, \"fields\": [ \"_id\", \"Title\", \"Author\", \"Date\" ], \"sort\": [ { \"Date\": \"desc\" } ] }"
+	DocsSortedUrl := basicUrl + "/blab_data/_find"
 
-	resp, err := http.Get(allDocsUrl)
+	req, err := http.NewRequest("POST", DocsSortedUrl, bytes.NewBuffer(jsonString))
+	req.Header.Set("Content-Type", "application/json")
+	client := &http.Client{}
+	resp, err := client.Do(req)
 	if err != nil {
-		log.Printf("Error scope: GET %s\nError message: %s\n", err)
+		log.Printf("Error scope: POST %s\nError message: %s\n", DocsSortedUrl, err)
 		os.Exit(1)
 	}
-
 	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
+	body, _ := ioutil.ReadAll(resp.Body)
 
 	//encoding JSON response
 	var data cloudant_data
@@ -95,11 +119,11 @@ func blabHandler(w http.ResponseWriter, req *http.Request) {
 	docUrl := basicUrl + "/blab_data/"
 	var postBody string
 
-	for i := 0; i < data.Total_rows; i++ {
+	for i := 0; i < len(data.Docs); i++ {
 
 			//Getting info single post
 			//GET https://$USERNAME:$PASSWORD@$USERNAME.cloudant.com/blab_data/<data_id>
-			singleDocUrl := docUrl + data.Rows[i].Id
+			singleDocUrl := docUrl + data.Docs[i].Id
 			resp, err := http.Get(singleDocUrl)
 			if err != nil {
 				log.Printf("Error scope: GET %s\nError message: %s\n", err)
@@ -153,7 +177,9 @@ func blabPostHandler(w http.ResponseWriter, req *http.Request) {
 		log.Printf("Err body: %s\n", err)
 		os.Exit(1)
 	}
-	postBody += "<div class ='post'><span class='title'>"+ p.Title +"</span>&#9;<span class='author'>"+ p.Author +"</span><br><span class='data'>"+ p.Date +"</span>" + "</span><br><p class='text'>"+ p.Text +"</p>" + "<a href='../blab'> <<< </a>" + "</div><br>"
+	p.Date = strings.Replace(p.Date, "T", " ", 1)
+	p.Date = strings.Replace(p.Date, "Z", "", 1)
+	postBody += "<div class ='post'><h3>"+ p.Title +"</h3>&#9;<h5>"+ p.Author +"</h5><br><span class='data'>"+ p.Date +"</span>" + "</span><br><p class='text'>"+ p.Text +"</p>" + "<a href='../blab'> <<< </a>" + "</div><br>"
 
 	page := struct {
 			Title	string
