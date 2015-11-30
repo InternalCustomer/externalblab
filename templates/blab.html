@@ -3,25 +3,38 @@
 {{ end }}
 
 {{ define "content"}}
+
+
 <section id="contents" style="background-color: #088A68">
 <div class="postContainer">
 	<h1 class="bang" style="font-weight: normal; text-align: center;">Just Blab it!</h1>
 	<div style="padding: 2%;" class="container">
 <div style="width: 80%; margin-left: 10%;" class="jumbotron">
 
-	<form role="form" name="form" style="letter-spacing:1px;padding:2%;" action="/save" method="post">
-	 <div class="form-group">
-		 Author:<br><input name="author" class="indie" type="text">
-	 </div>
-	 <div class="form-group">
-		 	Title:<br> <input name="title" class="indie" type="text">
-	 </div>
-	 <div class="form-group">
-		 Write your post here:<br>
-	 		<textarea name="text" class="indie" style="width:100%"></textarea>
-	 </div>
-	 <input class="btn btn-default" value="Blab it" type="submit">
-	</form>
+<!--- COLLAPSE BUTTON----->
+<div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">+ Blab</a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse in">
+        <div class="panel-body">
+					<form role="form" name="form" style="letter-spacing:1px;padding:2%;" action="/save" method="post">
+					 <div class="form-group">
+						 Author:<br><input name="author" class="indie" type="text">
+					 </div>
+					 <div class="form-group">
+						 	Title:<br> <input name="title" class="indie" type="text">
+					 </div>
+					 <div class="form-group">
+						 Write your post here:<br>
+					 		<textarea name="text" class="indie" style="width:100%"></textarea>
+					 </div>
+					 <input class="btn btn-default" value="Blab it" type="submit">
+					</form>
+				</div>
+      </div>
 
 	<div class='postContainer'>
 			{{.Body}}
