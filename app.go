@@ -11,7 +11,7 @@ import (
 	"time"
 	"strings"
 	//for extracting service credentials from VCAP_SERVICES
-	//"github.com/cloudfoundry-community/go-cfenv"
+	"github.com/cloudfoundry-community/go-cfenv"
 )
 
 type post struct {
@@ -66,6 +66,7 @@ var blabPost = template.Must(template.ParseFiles(
   "templates/blabPost.html",
 ))
 
+//To delete - for local host test
 var basicUrl = "https://9bd28748-9a66-441b-8b98-48f993b17e8e-bluemix:483f8ba7b8507e15548befa5e1b9c53cd3535f2c7ec75504dec3369df37b058d@9bd28748-9a66-441b-8b98-48f993b17e8e-bluemix.cloudant.com"
 
 func blabHandler(w http.ResponseWriter, req *http.Request) {
@@ -221,26 +222,26 @@ func init() {
 }
 
 func main() {
-	// appEnv, err := cfenv.Current()
-	// if appEnv != nil {
-	//
-	// 	log.Printf("ID %+v\n", appEnv.ID)
-	// }
-  // if err != nil {
-	//
-	// 	log.Printf("err")
-	// }
-	// log.Printf("appEnv.Services: \n%+v\n", appEnv.Services)
-	// //log.Printf("Cloudant credentials: \n%+v\n", appEnv.Services)
-	//
-	// cloudantServices, err := appEnv.Services.WithLabel("cloudantNoSQLDB")
-  // if err != nil || len(cloudantServices) == 0 {
-  //   log.Printf("No Cloudant service info found\n")
-  //   return
-  // }
-	//
-  // creds := cloudantServices[0].Credentials
-	// basicUrl = creds["url"].(string)
+	appEnv, err := cfenv.Current()
+	if appEnv != nil {
+
+		log.Printf("ID %+v\n", appEnv.ID)
+	}
+  if err != nil {
+
+		log.Printf("err")
+	}
+	log.Printf("appEnv.Services: \n%+v\n", appEnv.Services)
+	//log.Printf("Cloudant credentials: \n%+v\n", appEnv.Services)
+
+	cloudantServices, err := appEnv.Services.WithLabel("cloudantNoSQLDB")
+  if err != nil || len(cloudantServices) == 0 {
+    log.Printf("No Cloudant service info found\n")
+    return
+  }
+
+  creds := cloudantServices[0].Credentials
+	basicUrl = creds["url"].(string)
 
 	var port string
 		if port = os.Getenv("PORT"); len(port) == 0 {
