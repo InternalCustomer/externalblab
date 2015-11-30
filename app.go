@@ -24,6 +24,11 @@ type post struct {
 	Category []string
 }
 
+func (self *post) SetDefaults() {
+	if len(self.Author) == 0 { self.Author = "Anonymous" }
+	if len(self.Title) == 0 { self.Title = "No Title" }
+}
+
 type toPost struct {
 
 	Title string
@@ -42,8 +47,6 @@ type cloudant_data struct {
     }
 }
 
-var urlDb string = ""
-
 const (
 	DEFAULT_PORT = "8080"
 )
@@ -58,17 +61,102 @@ var blab = template.Must(template.ParseFiles(
   "templates/blab.html",
 ))
 
+var blabPost = template.Must(template.ParseFiles(
+	"templates/_base.html",
+  "templates/blabPost.html",
+))
+
+var basicUrl = "https://9bd28748-9a66-441b-8b98-48f993b17e8e-bluemix:483f8ba7b8507e15548befa5e1b9c53cd3535f2c7ec75504dec3369df37b058d@9bd28748-9a66-441b-8b98-48f993b17e8e-bluemix.cloudant.com"
+
 func blabHandler(w http.ResponseWriter, req *http.Request) {
 
-  postBody := "<p></p><hr><p>In progress</p>"
+	//LIST ALL DOCS IN blab_data
+	//GET https://$USERNAME:$PASSWORD@$USERNAME.cloudant.com/blab_data/_all_docs
+	allDocsUrl := basicUrl + "/blab_data/_all_docs"
+
+	resp, err := http.Get(allDocsUrl)
+	if err != nil {
+		log.Printf("Error scope: GET %s\nError message: %s\n", err)
+		os.Exit(1)
+	}
+
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+
+	//encoding JSON response
+	var data cloudant_data
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		log.Printf("Error encoding body response: %s\n", err)
+		os.Exit(1)
+	}
+
+	docUrl := basicUrl + "/blab_data/"
+	var postBody string
+
+	for i := 0; i < data.Total_rows; i++ {
+
+			//Getting info single post
+			//GET https://$USERNAME:$PASSWORD@$USERNAME.cloudant.com/blab_data/<data_id>
+			singleDocUrl := docUrl + data.Rows[i].Id
+			resp, err := http.Get(singleDocUrl)
+			if err != nil {
+				log.Printf("Error scope: GET %s\nError message: %s\n", err)
+				os.Exit(1)
+			}
+			defer resp.Body.Close()
+			body, err := ioutil.ReadAll(resp.Body)
+			//encoding JSON response
+			var p post
+			err = json.Unmarshal(body, &p)
+			if err != nil {
+				log.Printf("Error encoding body response: %s\n", err)
+				os.Exit(1)
+			}
+			p.SetDefaults()
+			postBody += "<div class ='post'><span class='title'>"+ p.Title +"</span>&#9;<span class='author'>"+ p.Author +"</span><br><span class='data'>"+ p.Date +"</span>" + "<a href='../blabPost?id=" + p.Id + "'> GO!!!</a>" + "</div><br>"
+	}
+
 	page := struct {
-				Title	string
-			  Body interface{}
-		}{"BLAB",template.HTML(postBody)}
+			Title	string
+			Body interface{}
+	}{"BLAB",template.HTML(postBody)}
 
-		page.Title = "BLAB"
+	blab.Execute(w, page)
+}
 
-    blab.Execute(w, page)
+func blabPostHandler(w http.ResponseWriter, req *http.Request) {
+
+	query := req.URL.Query()
+	id := query.Get("id")
+
+	singleDocUrl := basicUrl + "/blab_data/" + id
+	var postBody string
+
+	//Getting info single post
+	//GET https://$USERNAME:$PASSWORD@$USERNAME.cloudant.com/blab_data/<data_id>
+	resp, err := http.Get(singleDocUrl)
+	if err != nil {
+		// handle error
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	//encoding JSON response
+	var p post
+	p.SetDefaults()
+	err = json.Unmarshal(body, &p)
+	if err != nil {
+		log.Printf("Err body: %s\n", err)
+		os.Exit(1)
+	}
+	postBody += "<div class ='post'><span class='title'>"+ p.Title +"</span>&#9;<span class='author'>"+ p.Author +"</span><br><span class='data'>"+ p.Date +"</span>" + "</span><br><p class='text'>"+ p.Text +"</p>" + "<a href='../blabPostDelete?id=" + p.Id + "&rev="+ p.Rev +"'> DELETE!!!</a>" + "</div><br>"
+
+	page := struct {
+			Title	string
+			Body interface{}
+	}{"BLAB POST",template.HTML(postBody)}
+
+	blabPost.Execute(w, page)
 }
 
 //Index Page - about
@@ -77,6 +165,7 @@ func indexHandler(w http.ResponseWriter, req *http.Request) {
 }
 
 func save(w http.ResponseWriter, r *http.Request) {
+
     name := r.FormValue("author")
     text := r.FormValue("text")
 		title := r.FormValue("title")
@@ -98,29 +187,29 @@ func save(w http.ResponseWriter, r *http.Request) {
 		log.Printf("%s", b)
 
 		log.Printf("------------URL_DB--------------")
-		log.Printf("%s", urlDb)
+		log.Printf("%s", basicUrl)
 
 		log.Printf("-------- MAKING POST ON DB ------------")
 
-		dbToPost := urlDb+"/blab_data/"
+		dbToPost := basicUrl +"/blab_data/"
 
 		req, err := http.NewRequest("POST", dbToPost, bytes.NewBuffer(b))
- 	 //req.Header.Set("X-Custom-Header", "myvalue")
- 	 req.Header.Set("Content-Type", "application/json")
+		//req.Header.Set("X-Custom-Header", "myvalue")
+		req.Header.Set("Content-Type", "application/json")
 
- 	 client := &http.Client{}
- 	 resp, err := client.Do(req)
- 	 if err != nil {
- 			 panic(err)
- 	 }
- 	 defer resp.Body.Close()
+		client := &http.Client{}
+		resp, err := client.Do(req)
+		if err != nil {
+			panic(err)
+		}
+		defer resp.Body.Close()
 
- 	 log.Println("response Status:", resp.Status)
- 	 log.Println("response Headers:", resp.Header)
- 	 body, _ := ioutil.ReadAll(resp.Body)
- 	 log.Println("response Body:", string(body))
+		log.Println("response Status:", resp.Status)
+		log.Println("response Headers:", resp.Header)
+		body, _ := ioutil.ReadAll(resp.Body)
+		log.Println("response Body:", string(body))
 
-	 http.Redirect(w, r, "/blab", 301)
+		http.Redirect(w, r, "/blab", 301)
 
 }
 
@@ -148,65 +237,18 @@ func main() {
   }
 
   creds := cloudantServices[0].Credentials
-  username := creds["username"]
-	password := creds["password"]
-	urlDb = creds["url"].(string)
-
-	//ACCESS TO CLOUDANT
-	//GET https://$USERNAME:$PASSWORD@$USERNAME.cloudant.com
-	basicUrl := "https://" + username.(string) + ":" + password.(string) + "@" + username.(string) + ".cloudant.com"
-
-	resp, err := http.Get(basicUrl)
-
-	if err != nil {
-		// handle error
-	}
-
-	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
-
-	if err != nil {
-		//fmt.Printf("%s", err)
-		log.Printf("Err body: %s\n", err)
-		os.Exit(1)
-	}
-	log.Printf("Body: %s\n", string(body))
-	//fmt.Printf("%s\n", string(contents))
-
-
-	//LIST ALL DOCS IN blab_data
-	//GET https://$USERNAME:$PASSWORD@$USERNAME.cloudant.com/blab_data/_all_docs
-	allDocsUrl := basicUrl + "/blab_data/_all_docs"
-
-	resp, err = http.Get(allDocsUrl)
-
-	if err != nil {
-		// handle error
-	}
-
-	defer resp.Body.Close()
-	body, err = ioutil.ReadAll(resp.Body)
-
-	//encoding JSON response - post info
-	var p post
-	err = json.Unmarshal(body, &p)
-	if err != nil {
-		log.Printf("Err body: %s\n", err)
-		os.Exit(1)
-	}
-	log.Printf("Body: %s\n", string(body))
-	log.Printf("Title: %+v\n",p)
-	log.Printf("Title: %s\n",p.Title)
-	log.Printf("author: %s\n",p.Author)
+	basicUrl = creds["url"].(string)
 
 	var port string
-	if port = os.Getenv("PORT"); len(port) == 0 {
-		port = DEFAULT_PORT
-	}
+		if port = os.Getenv("PORT"); len(port) == 0 {
+			port = DEFAULT_PORT
+		}
 
 	http.HandleFunc("/", indexHandler)
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/blab", blabHandler)
+	http.HandleFunc("/blabPost", blabPostHandler)
+
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
 	log.Printf("Starting app on port %+v\n", port)
 	http.ListenAndServe(":"+port, nil)
