@@ -28,6 +28,10 @@ a:hover {
 	max-width: 200px;
 }
 
+.newappIcon:hover{
+	max-width: 210px;
+}
+
 h1 {
 	font-weight: bold;
 	font-size: 2em;
