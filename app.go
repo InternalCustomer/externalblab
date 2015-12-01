@@ -94,7 +94,6 @@ func blabHandler(w http.ResponseWriter, req *http.Request) {
 	// }
 	//Query to sort posts by date
 	var jsonString = []byte(`{ "selector": { "Date": { "$gt": 0 } }, "fields": [ "_id", "Title", "Author", "Date" ], "sort": [ { "Date": "desc" } ] }`)
-  //postBody := "{ \"selector\": { \"Date\": { \"$gt\": 0 } }, \"fields\": [ \"_id\", \"Title\", \"Author\", \"Date\" ], \"sort\": [ { \"Date\": \"desc\" } ] }"
 	DocsSortedUrl := basicUrl + "/blab_data/_find"
 
 	req, err := http.NewRequest("POST", DocsSortedUrl, bytes.NewBuffer(jsonString))
@@ -224,7 +223,6 @@ func save(w http.ResponseWriter, r *http.Request) {
 		dbToPost := basicUrl +"/blab_data/"
 
 		req, err := http.NewRequest("POST", dbToPost, bytes.NewBuffer(b))
-		//req.Header.Set("X-Custom-Header", "myvalue")
 		req.Header.Set("Content-Type", "application/json")
 
 		client := &http.Client{}
@@ -258,7 +256,6 @@ func main() {
 		log.Printf("err")
 	}
 	log.Printf("appEnv.Services: \n%+v\n", appEnv.Services)
-	//log.Printf("Cloudant credentials: \n%+v\n", appEnv.Services)
 
 	cloudantServices, err := appEnv.Services.WithLabel("cloudantNoSQLDB")
   if err != nil || len(cloudantServices) == 0 {
