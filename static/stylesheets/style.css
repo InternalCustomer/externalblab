@@ -25,11 +25,8 @@ a:hover {
 	display: block;
 	margin: 0 auto;
 	padding-bottom: 3%;
-	max-width: 200px;
-}
+	max-width: 500px;
 
-.newappIcon:hover{
-	max-width: 210px;
 }
 
 h1 {

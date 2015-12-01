@@ -1,16 +1,32 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<link rel="stylesheet" href="/static/stylesheets/style.css" />
 	<title>Blab application index</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		$("#logo").hover(function() {
+			$(this).attr("src","/static/images/blablogo.png");
+		}, function() {
+			$(this).attr("src","/static/images/blablogoonover.png");
+		});
+	});
+	</script>
 </head>
 	<body style="background-color: #088A68;">
 		<section id="contents" style="background-color: #088A68">
 			<div>
-				<h1 style="text-align: center;" id="message" class="bang">Blab</h1>
-				<a href="/blab" style="margin-left: 40%;"> <img class="newappIcon" src="/static/images/gophercolor.png"></a>
+				<a href="/blab" style="margin-left: 40%;"> <img id="logo" class="newappIcon" src="/static/images/blablogo.png" ></a>
 				<!--<p class="description">In progress</p><br>-->
 			</div>
 		</section>
+	</div>
+<footer>
+<center>
+	<p>Golang and Cloudant NoSQL DB reference app, have a look at the full code: <a href="https://github.ibm.com/InternalCustomer/BlabRep" rel="author">Blab repository</a>.<i>IBM Internal Customer Squad</i></p>
+</center>
+</footer>
 	</body>
 </html>
