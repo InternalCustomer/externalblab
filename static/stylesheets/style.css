@@ -44,54 +44,12 @@ font-size: 20px;
 letter-spacing: 1px;
 }
 
-.leftHalf {
-	float: left;
-	background-color: #26343f;
-	width: 45%;
-	height: 100%;
-}
-
-.rightHalf {
-	float: right;
-	width: 55%;
-	background-color: #313f4a;
-	height: 100%;
-	overflow: auto;
-}
-
 .description {
 	padding-left: 50px;
 	padding-right: 50px;
 	text-align: center;
 	font-size: 1.2em;
 	color: #ffffff;
-}
-
-.blue {
-	color: #00aed1;
-}
-
-table {
-	table-layout: fixed;
-	width: 800px;
-	margin: 0 auto;
-	word-wrap: break-word;
-	padding-top: 10%;
-}
-
-th {
-	border-bottom: 1px solid #000;
-}
-
-th, td {
-	text-align: left;
-	padding: 2px 20px;
-}
-
-.env-var {
-	text-align: right;
-	border-right: 1px solid #000;
-	width: 30%;
 }
 
 pre {
