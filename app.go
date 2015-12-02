@@ -40,12 +40,8 @@ type toPost struct {
 }
 
 type cloudant_data struct {
+
 	Docs []post
-	//Total_rows int //int
-	//Offset int //int
-	//Rows []struct {
-    //    Id string
-    //}
 }
 
 const (
@@ -66,8 +62,7 @@ var blabPost = template.Must(template.ParseFiles(
   "templates/blabPost.html",
 ))
 
-//To delete - for local host test
-var basicUrl = "https://9bd28748-9a66-441b-8b98-48f993b17e8e-bluemix:483f8ba7b8507e15548befa5e1b9c53cd3535f2c7ec75504dec3369df37b058d@9bd28748-9a66-441b-8b98-48f993b17e8e-bluemix.cloudant.com"
+var basicUrl string
 
 func blabHandler(w http.ResponseWriter, req *http.Request) {
 
