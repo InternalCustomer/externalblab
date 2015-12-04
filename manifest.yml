@@ -1,3 +1,7 @@
+declared services:
+  Cloudant NoSQl DB-am:
+    label: cloudantNoSQLDB
+    plan: shared
 applications:
 - path: .
   memory: 128M
